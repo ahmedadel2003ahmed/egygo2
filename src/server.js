@@ -36,6 +36,19 @@ const httpServer = createServer(app);
  */
 const startServer = async () => {
   try {
+    // Start HTTP server immediately (Railway requires quick response)
+    httpServer.listen(PORT, "0.0.0.0", () => {
+      console.log(`\n🚀 LocalGuide Server running on port ${PORT}`);
+      console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
+      console.log(`🔗 API URL: http://localhost:${PORT}`);
+      console.log(`💬 Socket.io URL: ws://localhost:${PORT}`);
+      console.log(`💚 Health check: http://localhost:${PORT}/health`);
+      console.log(`💚 API Docs: http://localhost:${PORT}/api-docs\n`);
+    });
+
+    // Initialize services in background
+    console.log("Initializing services...");
+    
     // Connect to MongoDB
     await connectDB();
 
@@ -48,16 +61,8 @@ const startServer = async () => {
     // Initialize Socket.io server
     const io = initializeSocketServer(httpServer);
     console.log("💬 Socket.io server initialized");
-
-    // Start HTTP server (handles both Express and Socket.io)
-    httpServer.listen(PORT, "0.0.0.0", () => {
-      console.log(`\n🚀 LocalGuide Server running on port ${PORT}`);
-      console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
-      console.log(`🔗 API URL: http://localhost:${PORT}`);
-      console.log(`💬 Socket.io URL: ws://localhost:${PORT}`);
-      console.log(`💚 Health check: http://localhost:${PORT}/health`);
-      console.log(`💚 API Docs: http://localhost:${PORT}/api-docs\n`);
-    });
+    
+    console.log("✅ All services initialized successfully");
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
