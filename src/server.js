@@ -50,7 +50,7 @@ const startServer = async () => {
     console.log("💬 Socket.io server initialized");
 
     // Start HTTP server (handles both Express and Socket.io)
-    httpServer.listen(PORT, () => {
+    httpServer.listen(PORT, "0.0.0.0", () => {
       console.log(`\n🚀 LocalGuide Server running on port ${PORT}`);
       console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
       console.log(`🔗 API URL: http://localhost:${PORT}`);
