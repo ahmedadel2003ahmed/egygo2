@@ -42,7 +42,6 @@ const guideSchema = new mongoose.Schema(
     province: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Province",
-      index: true,
     },
     provinces: [
       {

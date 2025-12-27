@@ -3,7 +3,7 @@
  * Represents an Egyptian Governorate with tourism content
  */
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const provinceSchema = new mongoose.Schema(
   {
@@ -11,69 +11,69 @@ const provinceSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true
+      trim: true,
     },
     slug: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
     },
     description: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     coverImage: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     // Additional metadata
     population: {
       type: Number,
-      default: null
+      default: null,
     },
     area: {
       type: Number, // in square kilometers
-      default: null
+      default: null,
     },
     capital: {
       type: String,
-      default: null
+      default: null,
     },
     // Geospatial center point
     location: {
       type: {
         type: String,
-        enum: ['Point'],
-        default: 'Point'
+        enum: ["Point"],
+        default: "Point",
       },
       coordinates: {
         type: [Number], // [longitude, latitude]
-        default: [31.2357, 30.0444] // Default to Cairo
-      }
-    }
+        default: [31.2357, 30.0444], // Default to Cairo
+      },
+    },
   },
   {
     timestamps: true,
     toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    toObject: { virtuals: true },
   }
 );
 
 // Indexes
 provinceSchema.index({ slug: 1 });
 provinceSchema.index({ name: 1 });
-provinceSchema.index({ location: '2dsphere' });
+provinceSchema.index({ location: "2dsphere" });
 
 // Virtual for places count (populated when needed)
-provinceSchema.virtual('placesCount', {
-  ref: 'Place',
-  localField: '_id',
-  foreignField: 'province',
-  count: true
+provinceSchema.virtual("placesCount", {
+  ref: "Place",
+  localField: "_id",
+  foreignField: "province",
+  count: true,
 });
 
 /**
@@ -81,7 +81,7 @@ provinceSchema.virtual('placesCount', {
  * @param {string} slug - Province slug
  * @returns {Promise<Province|null>}
  */
-provinceSchema.statics.findBySlug = async function(slug) {
+provinceSchema.statics.findBySlug = async function (slug) {
   return this.findOne({ slug: slug.toLowerCase() });
 };
 
@@ -89,13 +89,13 @@ provinceSchema.statics.findBySlug = async function(slug) {
  * Get all provinces with basic info
  * @returns {Promise<Province[]>}
  */
-provinceSchema.statics.getAllBasic = async function() {
+provinceSchema.statics.getAllBasic = async function () {
   return this.find({})
-    .select('name slug description coverImage location')
-    .sort('name')
+    .select("name slug description coverImage location")
+    .sort("name")
     .lean();
 };
 
-const Province = mongoose.model('Province', provinceSchema);
+const Province = mongoose.model("Province", provinceSchema);
 
 export default Province;

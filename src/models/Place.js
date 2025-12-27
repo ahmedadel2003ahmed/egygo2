@@ -19,13 +19,11 @@ const placeSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      index: true,
     },
     province: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Province",
       required: true,
-      index: true,
     },
     type: {
       type: String,
