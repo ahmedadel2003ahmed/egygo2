@@ -58,7 +58,6 @@ const guideSchema = new mongoose.Schema(
     slug: {
       type: String,
       unique: true,
-      index: true,
       sparse: true,
     },
     isVerified: {

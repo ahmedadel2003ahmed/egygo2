@@ -98,7 +98,6 @@ const placeSchema = new mongoose.Schema(
     tags: {
       type: [String],
       default: [],
-      index: true,
     },
     // Event-specific fields
     eventDate: {

@@ -11,16 +11,14 @@ const provinceSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true,
-      index: true
+      trim: true
     },
     slug: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
-      trim: true,
-      index: true
+      trim: true
     },
     description: {
       type: String,
