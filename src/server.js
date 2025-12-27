@@ -26,8 +26,6 @@ if (missingEnvVars.length > 0) {
   process.exit(1);
 }
 
-const PORT = process.env.PORT || 5001;
-
 // Create HTTP server for both Express and Socket.io
 const httpServer = createServer(app);
 
@@ -36,19 +34,9 @@ const httpServer = createServer(app);
  */
 const startServer = async () => {
   try {
-    // Start HTTP server immediately (Railway requires quick response)
-    httpServer.listen(PORT, "0.0.0.0", () => {
-      console.log(`\n🚀 LocalGuide Server running on port ${PORT}`);
-      console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
-      console.log(`🔗 API URL: http://localhost:${PORT}`);
-      console.log(`💬 Socket.io URL: ws://localhost:${PORT}`);
-      console.log(`💚 Health check: http://localhost:${PORT}/health`);
-      console.log(`💚 API Docs: http://localhost:${PORT}/api-docs\n`);
-    });
-
     // Initialize services in background
     console.log("Initializing services...");
-    
+
     // Connect to MongoDB
     await connectDB();
 
@@ -61,7 +49,7 @@ const startServer = async () => {
     // Initialize Socket.io server
     const io = initializeSocketServer(httpServer);
     console.log("💬 Socket.io server initialized");
-    
+
     console.log("✅ All services initialized successfully");
   } catch (error) {
     console.error("Failed to start server:", error);
@@ -88,5 +76,10 @@ process.on("unhandledRejection", (err) => {
   process.exit(1);
 });
 
-// Start the server
-startServer();
+// Start the server - Railway requires this at the end
+const PORT = process.env.PORT || 8080;
+
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log("🚀 Server listening on", PORT);
+  startServer();
+});
