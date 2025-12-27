@@ -48,6 +48,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 /**
+ * Root endpoint - responds immediately
+ */
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "LocalGuide API is running",
+    version: "1.0.0",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+/**
  * Stripe Webhook Route (MUST be before body parsers)
  * Uses raw body for signature verification
  */
