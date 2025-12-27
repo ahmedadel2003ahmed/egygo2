@@ -1,0 +1,55 @@
+{
+  "name": "localguide-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Complete backend for LocalGuide - Tourist and Guide platform with MVC architecture",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "lint": "eslint src/**/*.js",
+    "seed:trips": "node scripts/seedTripsSample.js",
+    "test:e2e": "node scripts/e2e_trip_flow_test.js",
+    "test:e2e:debug": "DEBUG=true node scripts/e2e_trip_flow_test.js"
+  },
+  "keywords": [
+    "localguide",
+    "tourism",
+    "express",
+    "mongodb",
+    "mvc"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "agora-token": "^2.0.5",
+    "axios": "^1.13.2",
+    "bcrypt": "^5.1.1",
+    "cheerio": "^1.1.2",
+    "cloudinary": "^1.41.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "firebase-admin": "^13.6.0",
+    "helmet": "^7.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^6.9.7",
+    "openai": "^6.15.0",
+    "playwright": "^1.57.0",
+    "resend": "^6.5.2",
+    "socket.io": "^4.8.2",
+    "stripe": "^14.25.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "ua-parser-js": "^1.0.37"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  }
+}
