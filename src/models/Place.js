@@ -11,7 +11,6 @@ const placeSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      index: true,
     },
     slug: {
       type: String,
